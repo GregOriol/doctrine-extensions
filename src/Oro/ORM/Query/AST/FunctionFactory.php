@@ -3,7 +3,8 @@
 namespace Oro\ORM\Query\AST;
 
 use Doctrine\ORM\Query\QueryException;
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use Oro\ORM\Query\AST\Platform\Functions\PlatformFunctionNode;
 
 class FunctionFactory
@@ -19,11 +20,13 @@ class FunctionFactory
      */
     public static function create($platformName, $functionName, array $parameters)
     {
+        $inflector = InflectorFactory::create()->build();
+
         $className = __NAMESPACE__
             . '\\Platform\\Functions\\'
-            . Inflector::classify(strtolower($platformName))
+            . $inflector->classify(strtolower($platformName))
             . '\\'
-            . Inflector::classify(strtolower($functionName));
+            . $inflector->classify(strtolower($functionName));
 
         if (!class_exists($className)) {
             throw QueryException::syntaxError(
