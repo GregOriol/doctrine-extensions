@@ -15,7 +15,7 @@
         "php": ">=8.0",
         "doctrine/orm": ">=2.6, <3.0",
         "doctrine/dbal": ">=2.6, <4.0",
-        "doctrine/lexer": "^2, <4"
+        "doctrine/lexer": ">=2.0, <4"
     },
     "require-dev": {
         "phpunit/phpunit": "9.*",
